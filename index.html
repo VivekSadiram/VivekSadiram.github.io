@@ -3,11 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vivek Sadiram's Awesome Page</title>
+    <title>Vivek Sadiram | Awesome Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset & Body Styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e; /* Dark Blue */
+            color: #e0e0e0; /* Light Gray */
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #0f3460; /* Slightly lighter blue */
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e94560; /* Reddish accent */
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e94560;
+        }
+
+        /* Hero Section */
+        .hero {
+            flex-grow: 1; /* Makes hero take up available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(45deg, #1a1a2e, #0f3460); /* Gradient background */
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #e94560;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        /* Typing effect specific styles */
+        .typing-text {
+            color: #e0e0e0;
+            border-right: 2px solid rgba(255, 255, 255, .75); /* Blinking cursor */
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        /* Keyframes for typing effect */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Keyframes for blinking caret */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255, 255, 255, .75); }
+        }
+
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #e94560;
+            color: #ffffff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6a80;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #0f3460; /* Alternate background for sections */
+        }
+
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #e94560;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #e94560;
+            margin: 10px auto 0;
+        }
+
+        .about-content, .portfolio-grid, .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            width: calc(33% - 30px); /* Three columns */
+            min-width: 280px; /* Minimum width for smaller screens */
+            text-align: left;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .portfolio-item-content {
+            padding: 20px;
+        }
+
+        .portfolio-item-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #e94560;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-item-content p {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-item-content a {
+            color: #e94560;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .portfolio-item-content a:hover {
+            color: #ff6a80;
+        }
+
+        .contact-card {
+            background-color: #1a1a2e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: calc(33% - 30px);
+            min-width: 280px;
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .contact-card p, .contact-card a {
+            color: #b0b0b0;
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: #e94560;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f3460;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #e0e0e0;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: #e94560;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .portfolio-item, .contact-card {
+                width: 90%; /* Single column on small screens */
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Page!</h1>
-    <p>This is my very first website on GitHub Pages.</p>
-    <p>I'm so excited to learn more about web development!</p>
+
+    <header>
+        <nav>
+            <a href="#hero" class="logo">Vivek Sadiram</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1>Hello, I'm <span style="color: #e0e0e0;">Vivek Sadiram</span>.</h1>
+            <p>I am a <span class="typing-text" data-words='["Developer", "Innovator", "Problem Solver", "Tech Enthusiast"]'></span></p>
+            <a href="#portfolio" class="btn-primary">View My Work</a>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to my corner of the internet! I'm Vivek Sadiram, a passionate and dedicated individual exploring the vast world of technology. My journey involves diving deep into various programming languages, frameworks, and tools to build exciting projects and solve real-world problems.</p>
+                    <p>I believe in continuous learning and embracing new challenges. Whether it's crafting clean code, designing intuitive user experiences, or optimizing performance, I strive for excellence in every endeavor. This space is where I share my creations, insights, and the ongoing adventure of my tech career.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>My Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/e94560/FFFFFF?text=Project+1" alt="Project 1">
+                    <div class="portfolio-item-content">
+                        <h3>Project Name 1</h3>
+                        <p>A brief description of your project. Highlight the key technologies used and what it achieves.</p>
+                        <a href="#">Learn More &rarr;</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/0f3460/FFFFFF?text=Project+2" alt="Project 2">
+                    <div class="portfolio-item-content">
+                        <h3>Project Name 2</h3>
+                        <p>Another compelling project description. Showcases different skills or areas of expertise.</p>
+                        <a href="#">Learn More &rarr;</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x200/1a1a2e/FFFFFF?text=Project+3" alt="Project 3">
+                    <div class="portfolio-item-content">
+                        <h3>Project Name 3</h3>
+                        <p>Describe your third project. This could be a personal project, a hackathon entry, or a client work.</p>
+                        <a href="#">Learn More &rarr;</a>
+                    </div>
+                </div>
+                </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Me</h3>
+                    <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call Me</h3>
+                    <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>Kagaznagar, Telangana, India</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Vivek Sadiram. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/VivekSadiram" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/yourlinkedinprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/yourtwitterhandle" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingTextElement = document.querySelector('.typing-text');
+            const words = JSON.parse(typingTextElement.dataset.words);
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let delay = 100; // Typing speed
+
+            function type() {
+                const currentWord = words[wordIndex];
+                const displayedText = isDeleting
+                    ? currentWord.substring(0, charIndex--)
+                    : currentWord.substring(0, charIndex++);
+
+                typingTextElement.textContent = displayedText;
+
+                let currentDelay = delay;
+                if (isDeleting) {
+                    currentDelay /= 2; // Faster deleting
+                }
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    currentDelay = 1500; // Pause at end of word
+                    isDeleting = true;
+                } else if (isDeleting && charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length; // Move to next word
+                    currentDelay = 500; // Pause before typing new word
+                }
+
+                setTimeout(type, currentDelay);
+            }
+
+            type(); // Start the typing animation
+        });
+    </script>
+
 </body>
 </html>
