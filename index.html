@@ -18,12 +18,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
         }
 
         /* Header & Navigation */
         header {
             background-color: #1A1A1A; /* Slightly lighter dark grey */
-            padding: 1.5rem 0;
+            padding: 1.5rem 40px; /* Increased padding for full-width feel */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* More prominent, dark shadow */
             position: sticky;
             top: 0;
@@ -31,12 +32,11 @@
         }
 
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            max-width: 1400px; /* Allow wider content for navigation */
+            margin: 0 auto;
         }
 
         .logo {
@@ -52,6 +52,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            transition: all 0.3s ease-in-out; /* For mobile menu animation */
         }
 
         nav ul li {
@@ -70,6 +71,18 @@
             color: #00EAFE; /* Electric Blue Accent */
         }
 
+        /* Hamburger Menu Toggle */
+        .menu-toggle {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #00EAFE;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001; /* Ensure it's above other elements */
+        }
+
         /* Hero Section */
         .hero {
             flex-grow: 1;
@@ -78,7 +91,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 40px; /* Increased padding for full-width feel */
             background: linear-gradient(45deg, #0A0A0A, #1A1A1A); /* Subtle dark gradient */
         }
 
@@ -92,7 +105,7 @@
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 30px;
-            max-width: 800px;
+            max-width: 800px; /* Keep text contained */
             color: #CCCCCC;
         }
 
@@ -138,9 +151,10 @@
 
         /* Sections */
         section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 80px 40px; /* Increased padding for full-width feel */
+            width: 100%; /* Ensure sections take full width */
+            box-sizing: border-box; /* Include padding in width calculation */
+            margin: 0 auto; /* Keep margin auto in case of a max-width later */
             text-align: center;
         }
 
@@ -172,7 +186,11 @@
             justify-content: center;
             gap: 30px;
             margin-top: 40px;
+            max-width: 1200px; /* Max width for inner content grids */
+            margin-left: auto;
+            margin-right: auto;
         }
+
         /* Important for single contact card to center it */
         .contact-info {
             width: 100%; /* Ensure it spans full width to help centering */
@@ -191,7 +209,7 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: calc(33% - 30px);
+            width: calc(33.333% - 20px); /* Adjusting for 3-column on wider screens */
             min-width: 280px;
             text-align: left;
             border: 1px solid #2a2a2a; /* Subtle border for definition */
@@ -244,8 +262,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             text-align: center;
-            /* Adjusted width to occupy full space for single card, or flex correctly */
-            width: 100%; /* For single card, make it take full available space (respects gap) */
             max-width: 400px; /* Limit max width for a single card */
             border: 1px solid #2a2a2a; /* Subtle border */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -254,7 +270,6 @@
         .contact-info > .contact-card:only-child {
             margin: 0 auto;
         }
-
 
         .contact-card:hover {
              transform: translateY(-5px);
@@ -288,7 +303,7 @@
             background-color: #1A1A1A; /* Dark background */
             color: #CCCCCC; /* Light grey text */
             text-align: center;
-            padding: 2rem 0;
+            padding: 2rem 40px; /* Increased padding */
             margin-top: auto;
             font-size: 0.9rem;
             border-top: 1px solid #2a2a2a; /* Subtle top border */
@@ -312,26 +327,55 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 20px; /* Adjust padding for smaller screens */
+            }
             nav {
-                flex-direction: column;
+                flex-direction: row; /* Keep logo and toggle on one line */
+                justify-content: space-between;
+                width: 100%;
+                max-width: none; /* No max width for mobile nav */
             }
 
             nav ul {
-                margin-top: 20px;
+                display: none; /* Hide desktop menu by default */
                 flex-direction: column;
-                align-items: center;
+                position: absolute;
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background-color: #1A1A1A; /* Same as header background */
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid #2a2a2a;
+                padding: 20px 0;
+                max-height: 0; /* Hidden state */
+                overflow: hidden; /* Hide overflow content */
+            }
+
+            nav ul.nav-open {
+                display: flex; /* Show menu when active */
+                max-height: 300px; /* Max height for animation (adjust as needed) */
             }
 
             nav ul li {
                 margin: 10px 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block; /* Show hamburger on mobile */
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 60px 20px; /* Adjust section padding for mobile */
             }
 
             section h2 {
@@ -339,10 +383,14 @@
             }
 
             .portfolio-item, .contact-card {
-                width: 90%;
+                width: 100%; /* Single column on small screens */
+                max-width: 400px; /* Prevent too wide on very small screens */
             }
             .contact-info > .contact-card:only-child {
                 margin: 0 auto; /* Ensure it centers on mobile too */
+            }
+            .about-content, .portfolio-grid, .contact-info {
+                gap: 20px; /* Smaller gap on mobile */
             }
         }
     </style>
@@ -352,6 +400,7 @@
     <header>
         <nav>
             <a href="#hero" class="logo">Vivek Sadiram</a>
+            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -384,7 +433,7 @@
                     <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+1" alt="Project 1">
                     <div class="portfolio-item-content">
                         <h3>Project Name 1</h3>
-                        <p>A brief description of your project. Highlight the key technologies used and what they achieve.</p>
+                        <p>A brief description of your project. Highlight the key technologies used and what it achieves.</p>
                         <a href="#">Learn More &rarr;</a>
                     </div>
                 </div>
@@ -400,7 +449,7 @@
                     <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+3" alt="Project 3">
                     <div class="portfolio-item-content">
                         <h3>Project Name 3</h3>
-                        <p>Describe your third project. This could be a personal project, a hackathon entry, or client work.</p>
+                        <p>Describe your third project. This could be a personal project, a hackathon entry, or a client work.</p>
                         <a href="#">Learn More &rarr;</a>
                     </div>
                 </div>
@@ -413,9 +462,9 @@
                 <div class="contact-card">
                     <i class="fas fa-envelope"></i>
                     <h3>Email Me</h3>
-                    <p><a href="mailto:VivekSadiram@Outlook.com">VivekSadiram@Outlook.com</a></p>
+                    <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
                 </div>
-                </div>
+            </div>
         </section>
     </main>
 
@@ -430,6 +479,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Typing Effect (existing code)
             const typingTextElement = document.querySelector('.typing-text');
             const words = JSON.parse(typingTextElement.dataset.words);
             let wordIndex = 0;
@@ -463,6 +513,24 @@
             }
 
             type(); // Start the typing animation
+
+            // Mobile Menu Toggle (new code)
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navUl = document.querySelector('nav ul');
+            const navLinks = document.querySelectorAll('nav ul li a'); // Get all navigation links
+
+            menuToggle.addEventListener('click', function() {
+                navUl.classList.toggle('nav-open');
+            });
+
+            // Close menu when a link is clicked (for smooth scrolling behavior)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navUl.classList.contains('nav-open')) {
+                        navUl.classList.remove('nav-open');
+                    }
+                });
+            });
         });
     </script>
 
