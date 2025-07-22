@@ -12,8 +12,8 @@
             font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a2e; /* Dark Blue */
-            color: #e0e0e0; /* Light Gray */
+            background-color: #0A0A0A; /* Deep Dark Grey / Near Black */
+            color: #CCCCCC; /* Light Grey for main text */
             line-height: 1.6;
             display: flex;
             flex-direction: column;
@@ -22,9 +22,9 @@
 
         /* Header & Navigation */
         header {
-            background-color: #0f3460; /* Slightly lighter blue */
+            background-color: #1A1A1A; /* Slightly lighter dark grey */
             padding: 1.5rem 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* More prominent, dark shadow */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -43,7 +43,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #e94560; /* Reddish accent */
+            color: #00EAFE; /* Electric Blue Accent */
             text-decoration: none;
         }
 
@@ -59,7 +59,7 @@
         }
 
         nav ul li a {
-            color: #e0e0e0;
+            color: #CCCCCC; /* Light grey */
             text-decoration: none;
             font-weight: 400;
             font-size: 1.1rem;
@@ -67,38 +67,39 @@
         }
 
         nav ul li a:hover {
-            color: #e94560;
+            color: #00EAFE; /* Electric Blue Accent */
         }
 
         /* Hero Section */
         .hero {
-            flex-grow: 1; /* Makes hero take up available space */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(45deg, #1a1a2e, #0f3460); /* Gradient background */
+            background: linear-gradient(45deg, #0A0A0A, #1A1A1A); /* Subtle dark gradient */
         }
 
         .hero h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 3.5rem;
             margin-bottom: 20px;
-            color: #e94560;
+            color: #FFFFFF; /* Pure white for main heading */
         }
 
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 30px;
             max-width: 800px;
+            color: #CCCCCC;
         }
 
         /* Typing effect specific styles */
         .typing-text {
-            color: #e0e0e0;
-            border-right: 2px solid rgba(255, 255, 255, .75); /* Blinking cursor */
+            color: #00EAFE; /* Electric Blue Accent for typing text */
+            border-right: 2px solid #00EAFE; /* Blinking cursor matches accent */
             white-space: nowrap;
             overflow: hidden;
             animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
@@ -113,25 +114,26 @@
         /* Keyframes for blinking caret */
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: rgba(255, 255, 255, .75); }
+            50% { border-color: #00EAFE; } /* Blinking cursor matches accent */
         }
-
 
         .btn-primary {
             display: inline-block;
-            background-color: #e94560;
-            color: #ffffff;
+            background-color: #00EAFE; /* Electric Blue Accent */
+            color: #0A0A0A; /* Dark text on bright button */
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.2rem;
             font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 234, 254, 0.4); /* Glow effect */
         }
 
         .btn-primary:hover {
-            background-color: #ff6a80;
+            background-color: #33F0FF; /* Slightly brighter blue on hover */
             transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 234, 254, 0.6); /* More glow on hover */
         }
 
         /* Sections */
@@ -143,13 +145,13 @@
         }
 
         section:nth-of-type(even) {
-            background-color: #0f3460; /* Alternate background for sections */
+            background-color: #1A1A1A; /* Alternate dark background for sections */
         }
 
         section h2 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
-            color: #e94560;
+            color: #FFFFFF; /* White for section headings */
             margin-bottom: 40px;
             position: relative;
             display: inline-block;
@@ -160,7 +162,7 @@
             display: block;
             width: 80px;
             height: 4px;
-            background-color: #e94560;
+            background-color: #00EAFE; /* Accent line under headings */
             margin: 10px auto 0;
         }
 
@@ -176,27 +178,31 @@
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
+            color: #CCCCCC;
         }
 
         .portfolio-item {
-            background-color: #1a1a2e;
+            background-color: #0A0A0A; /* Darker background for items */
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-            width: calc(33% - 30px); /* Three columns */
-            min-width: 280px; /* Minimum width for smaller screens */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: calc(33% - 30px);
+            min-width: 280px;
             text-align: left;
+            border: 1px solid #2a2a2a; /* Subtle border for definition */
         }
 
         .portfolio-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 234, 254, 0.2), 0 4px 15px rgba(0, 0, 0, 0.8); /* Accent glow on hover */
         }
 
         .portfolio-item img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            border-bottom: 1px solid #2a2a2a; /* Subtle line below image */
         }
 
         .portfolio-item-content {
@@ -206,68 +212,76 @@
         .portfolio-item-content h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
-            color: #e94560;
+            color: #00EAFE; /* Accent color for project titles */
             margin-top: 0;
             margin-bottom: 10px;
         }
 
         .portfolio-item-content p {
             font-size: 0.95rem;
-            color: #b0b0b0;
+            color: #999999; /* Slightly darker grey for body text in cards */
             margin-bottom: 15px;
         }
 
         .portfolio-item-content a {
-            color: #e94560;
+            color: #00EAFE; /* Accent color for links */
             text-decoration: none;
             font-weight: 700;
             transition: color 0.3s ease;
         }
 
         .portfolio-item-content a:hover {
-            color: #ff6a80;
+            color: #33F0FF; /* Brighter accent on hover */
         }
 
         .contact-card {
-            background-color: #1a1a2e;
+            background-color: #0A0A0A; /* Darker background for cards */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             text-align: center;
             width: calc(33% - 30px);
             min-width: 280px;
+            border: 1px solid #2a2a2a; /* Subtle border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 25px rgba(0, 234, 254, 0.2), 0 4px 15px rgba(0, 0, 0, 0.8); /* Accent glow on hover */
         }
 
         .contact-card i {
             font-size: 2.5rem;
-            color: #e94560;
+            color: #00EAFE; /* Accent color for icons */
             margin-bottom: 15px;
         }
 
         .contact-card h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.3rem;
-            color: #e0e0e0;
+            color: #FFFFFF; /* White for contact card headings */
             margin-bottom: 10px;
         }
 
         .contact-card p, .contact-card a {
-            color: #b0b0b0;
+            color: #999999; /* Slightly darker grey for body text in cards */
             text-decoration: none;
         }
 
         .contact-card a:hover {
-            color: #e94560;
+            color: #00EAFE; /* Accent color on hover */
         }
 
         /* Footer */
         footer {
-            background-color: #0f3460;
-            color: #e0e0e0;
+            background-color: #1A1A1A; /* Dark background */
+            color: #CCCCCC; /* Light grey text */
             text-align: center;
             padding: 2rem 0;
-            margin-top: auto; /* Pushes footer to the bottom */
+            margin-top: auto;
             font-size: 0.9rem;
+            border-top: 1px solid #2a2a2a; /* Subtle top border */
         }
 
         .social-links {
@@ -275,14 +289,14 @@
         }
 
         .social-links a {
-            color: #e0e0e0;
+            color: #CCCCCC; /* Light grey icons */
             font-size: 1.8rem;
             margin: 0 15px;
             transition: color 0.3s ease, transform 0.2s ease;
         }
 
         .social-links a:hover {
-            color: #e94560;
+            color: #00EAFE; /* Accent color on hover */
             transform: translateY(-3px);
         }
 
@@ -315,7 +329,7 @@
             }
 
             .portfolio-item, .contact-card {
-                width: 90%; /* Single column on small screens */
+                width: 90%;
             }
         }
     </style>
@@ -335,7 +349,7 @@
 
     <main>
         <section id="hero" class="hero">
-            <h1>Hello, I'm <span style="color: #e0e0e0;">Vivek Sadiram</span>.</h1>
+            <h1>Hello, I'm <span style="color: #FFFFFF;">Vivek Sadiram</span>.</h1>
             <p>I am a <span class="typing-text" data-words='["Developer", "Innovator", "Problem Solver", "Tech Enthusiast"]'></span></p>
             <a href="#portfolio" class="btn-primary">View My Work</a>
         </section>
@@ -354,7 +368,7 @@
             <h2>My Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/e94560/FFFFFF?text=Project+1" alt="Project 1">
+                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+1" alt="Project 1">
                     <div class="portfolio-item-content">
                         <h3>Project Name 1</h3>
                         <p>A brief description of your project. Highlight the key technologies used and what it achieves.</p>
@@ -362,7 +376,7 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/0f3460/FFFFFF?text=Project+2" alt="Project 2">
+                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+2" alt="Project 2">
                     <div class="portfolio-item-content">
                         <h3>Project Name 2</h3>
                         <p>Another compelling project description. Showcases different skills or areas of expertise.</p>
@@ -370,7 +384,7 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/1a1a2e/FFFFFF?text=Project+3" alt="Project 3">
+                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+3" alt="Project 3">
                     <div class="portfolio-item-content">
                         <h3>Project Name 3</h3>
                         <p>Describe your third project. This could be a personal project, a hackathon entry, or a client work.</p>
