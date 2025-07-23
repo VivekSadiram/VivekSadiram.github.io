@@ -23,22 +23,22 @@
 
         /* NEW: Repel Dot Effect Styles */
         .repel-dot {
-            position: absolute;
-            left: 0; /* Base position for transform */
-            top: 0;  /* Base position for transform */
-            width: 4px; /* Still small */
-            height: 4px; /* Still small */
-            background-color: rgba(255, 255, 255, 0.25); /* CHANGED: More visible white transparency */
+            position: fixed; /* CHANGED: Fixed position so they stay in viewport on scroll */
+            left: 0; 
+            top: 0;  
+            width: 2px; /* CHANGED: Even smaller */
+            height: 2px; /* CHANGED: Even smaller */
+            background-color: rgba(255, 255, 255, 0.4); /* CHANGED: Much more visible white transparency */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* CHANGED: Brighter white glow */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* CHANGED: Stronger white glow */
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: 9998; /* Below content, above background */
+            z-index: -1; /* CHANGED: Place far behind all content */
             transition: transform 0.3s ease-out; /* Smooth movement and return */
         }
-        /* Make sure the main content is above the dots */
+        /* Ensure main content elements are above the dots */
         main, header, footer {
-            position: relative; /* Ensure these are above the dots */
-            z-index: 9999;
+            position: relative; /* Ensure these are positioned to respect z-index */
+            z-index: 1; /* Default z-index for content */
         }
 
 
@@ -49,7 +49,7 @@
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Subtle white shadow below header */
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 1000; /* Higher than dots */
         }
 
         nav {
@@ -101,7 +101,7 @@
             color: #00EAFE;
             cursor: pointer;
             padding: 10px;
-            z-index: 1001; /* Ensure it's above other elements */
+            z-index: 1001; /* Higher than dots */
         }
 
         /* Hero Section */
@@ -582,7 +582,7 @@
 
             // NEW: Repel Dot Effect JavaScript
             const repelDots = [];
-            const numDots = 200; // CHANGED: Increased number of dots to 200
+            const numDots = 400; // CHANGED: Increased number of dots to 400
             const repelRadius = 100; // Cursor interaction radius (in pixels)
             const repelStrength = 50; // CHANGED: Slightly increased repel strength
 
@@ -593,8 +593,10 @@
                 document.body.appendChild(dot);
                 
                 // Store initial random positions relative to the viewport
+                // Spawning over full document.body.scrollHeight still relevant for `position:absolute` or initial large pages
+                // For `position:fixed`, initialY should be window.innerHeight
                 const initialX = Math.random() * window.innerWidth;
-                const initialY = Math.random() * document.body.scrollHeight; // Use scrollHeight for full page height
+                const initialY = Math.random() * window.innerHeight; // CHANGED: Spawn within current viewport for fixed
                 
                 dot._initialX = initialX; // Store base X
                 dot._initialY = initialY; // Store base Y
@@ -656,7 +658,7 @@
                 // When resizing, we re-randomize positions to fill new dimensions
                 repelDots.forEach(dot => {
                     dot._initialX = Math.random() * window.innerWidth;
-                    dot._initialY = Math.random() * document.body.scrollHeight;
+                    dot._initialY = Math.random() * window.innerHeight; // CHANGED: Recalculate based on viewport
                     dot.style.transform = `translate(${dot._initialX}px, ${dot._initialY}px)`;
                     dot._offsetX = 0; // Reset offset on resize
                     dot._offsetY = 0;
