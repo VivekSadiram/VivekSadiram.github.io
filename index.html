@@ -191,9 +191,9 @@
             margin-right: auto;
         }
 
-        /* Important for single contact card to center it */
-        .contact-info {
-            width: 100%; /* Ensure it spans full width to help centering */
+        /* Specific styles for About Me centering */
+        .about-content {
+            text-align: center; /* Ensures text inside is centered */
         }
 
         .about-text p {
@@ -209,8 +209,9 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: calc(33.333% - 20px); /* Adjusting for 3-column on wider screens */
-            min-width: 280px;
+            /* Adjusted width for 2 columns with gap on larger screens */
+            width: calc(50% - 15px); /* Two columns, considering 30px gap */
+            min-width: 300px; /* Minimum width for responsiveness */
             text-align: left;
             border: 1px solid #2a2a2a; /* Subtle border for definition */
         }
@@ -262,14 +263,24 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             text-align: center;
-            max-width: 400px; /* Limit max width for a single card */
+            /* Adjusted width to be same as portfolio items */
+            width: calc(50% - 15px); /* Should match portfolio-item width */
+            min-width: 300px; /* Should match portfolio-item min-width */
             border: 1px solid #2a2a2a; /* Subtle border */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        /* If only one card, ensure it centers properly */
+        /* Ensure the single contact card centers if it's the only one */
+        .contact-info {
+            justify-content: center; /* Already set, but good to confirm */
+            width: 100%; /* Ensure it spans full width to help centering */
+        }
         .contact-info > .contact-card:only-child {
             margin: 0 auto;
+            /* This overrides width: calc(50% - 15px) if it causes issues on single row */
+            /* If it looks too wide, uncomment max-width below or adjust width here */
+            max-width: 400px; /* Keep it from stretching too wide if only one */
         }
+
 
         .contact-card:hover {
              transform: translateY(-5px);
@@ -441,14 +452,6 @@
                     <div class="portfolio-item-content">
                         <h3>Project Name 2</h3>
                         <p>Another compelling project description. Showcases different skills or areas of expertise.</p>
-                        <a href="#">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+3" alt="Project 3">
-                    <div class="portfolio-item-content">
-                        <h3>Project Name 3</h3>
-                        <p>Describe your third project. This could be a personal project, a hackathon entry, or a client work.</p>
                         <a href="#">Learn More &rarr;</a>
                     </div>
                 </div>
