@@ -19,7 +19,6 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden; /* Prevent horizontal scroll on small screens */
-            /* REMOVED: cursor: none; */
         }
 
         /* NEW: Repel Dot Effect Styles */
@@ -27,11 +26,11 @@
             position: absolute;
             left: 0; /* Base position for transform */
             top: 0;  /* Base position for transform */
-            width: 4px; /* CHANGED: Much smaller */
-            height: 4px; /* CHANGED: Much smaller */
-            background-color: rgba(255, 255, 255, 0.1); /* CHANGED: White with low opacity */
+            width: 4px; /* Still small */
+            height: 4px; /* Still small */
+            background-color: rgba(255, 255, 255, 0.25); /* CHANGED: More visible white transparency */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* CHANGED: White glow, slightly more visible for its size */
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* CHANGED: Brighter white glow */
             pointer-events: none; /* Allows clicks to pass through */
             z-index: 9998; /* Below content, above background */
             transition: transform 0.3s ease-out; /* Smooth movement and return */
@@ -583,9 +582,9 @@
 
             // NEW: Repel Dot Effect JavaScript
             const repelDots = [];
-            const numDots = 150; // CHANGED: Increased number of dots
+            const numDots = 200; // CHANGED: Increased number of dots to 200
             const repelRadius = 100; // Cursor interaction radius (in pixels)
-            const repelStrength = 40; // How far they move away (in pixels)
+            const repelStrength = 50; // CHANGED: Slightly increased repel strength
 
             // Create dots dynamically and set initial positions
             for (let i = 0; i < numDots; i++) {
