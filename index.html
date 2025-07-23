@@ -19,33 +19,27 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden; /* Prevent horizontal scroll on small screens */
-            cursor: none; /* Hide default cursor */
+            /* REMOVED: cursor: none; */
         }
 
-        /* NEW: Cursor Glow Effect Styles */
-        #cursor-glow {
-            position: fixed;
-            top: -50px; /* Initial position off-screen */
-            left: -50px;
-            width: 30px; /* Size of the glow */
-            height: 30px;
-            background-color: rgba(0, 234, 254, 0.4); /* Accent blue with transparency */
+        /* NEW: Repel Dot Effect Styles */
+        .repel-dot {
+            position: absolute;
+            left: 0; /* Base position for transform */
+            top: 0;  /* Base position for transform */
+            width: 10px; /* Size of the dot */
+            height: 10px;
+            background-color: rgba(0, 234, 254, 0.2); /* Accent blue with transparency */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 20px rgba(0, 234, 254, 0.8), /* Inner glow */
-                        0 0 40px rgba(0, 234, 254, 0.6); /* Outer glow */
+            box-shadow: 0 0 10px rgba(0, 234, 254, 0.5); /* Subtle glow */
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: 9999; /* Ensure it's on top */
-            opacity: 0.8; /* Slightly visible always */
-            transform: translate(-50%, -50%); /* Center the glow on the cursor */
-            transition: opacity 0.2s ease-in-out; /* Smooth fade for hover */
+            z-index: 9998; /* Below content, above background */
+            transition: transform 0.3s ease-out; /* Smooth movement and return */
         }
-
-        body:hover #cursor-glow {
-            opacity: 1; /* Full opacity on hover */
-        }
-        body:active #cursor-glow {
-            transform: translate(-50%, -50%) scale(0.8); /* Shrink on click */
-            opacity: 0.6;
+        /* Make sure the main content is above the dots */
+        main, header, footer {
+            position: relative; /* Ensure these are above the dots */
+            z-index: 9999;
         }
 
 
@@ -445,8 +439,6 @@
 </head>
 <body>
 
-    <div id="cursor-glow"></div>
-
     <header>
         <nav>
             <a href="#hero" class="logo">Vivek Sadiram</a>
@@ -589,28 +581,35 @@
                 });
             });
 
-            // NEW: Cursor Glow Effect JavaScript
-            const cursorGlow = document.getElementById('cursor-glow');
+            // NEW: Repel Dot Effect JavaScript
+            const repelDots = [];
+            const numDots = 20; // Number of floating elements
+            const repelRadius = 100; // Cursor interaction radius (in pixels)
+            const repelStrength = 40; // How far they move away (in pixels)
+
+            // Create dots dynamically and set initial positions
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('repel-dot');
+                document.body.appendChild(dot);
+                
+                // Store initial random positions relative to the viewport
+                const initialX = Math.random() * window.innerWidth;
+                const initialY = Math.random() * document.body.scrollHeight; // Use scrollHeight for full page height
+                
+                dot._initialX = initialX; // Store base X
+                dot._initialY = initialY; // Store base Y
+                dot._offsetX = 0; // Current X offset from base
+                dot._offsetY = 0; // Current Y offset from base
+
+                // Apply initial position using transform
+                dot.style.transform = `translate(${initialX}px, ${initialY}px)`;
+                repelDots.push(dot);
+            }
+
+            // Mouse coordinates
             let mouseX = 0;
             let mouseY = 0;
-            let cursorX = 0;
-            let cursorY = 0;
-
-            // Function to animate the cursor glow position
-            function animateCursor() {
-                // Apply a small smoothing factor (0.1) for the lag effect
-                cursorX += (mouseX - cursorX) * 0.1;
-                cursorY += (mouseY - cursorY) * 0.1;
-
-                // Update the position of the cursor glow element
-                if (cursorGlow) {
-                    cursorGlow.style.left = cursorX + 'px';
-                    cursorGlow.style.top = cursorY + 'px';
-                }
-
-                // Request the next animation frame for a smooth loop
-                requestAnimationFrame(animateCursor);
-            }
 
             // Update mouse coordinates on mousemove
             document.addEventListener('mousemove', (e) => {
@@ -618,8 +617,51 @@
                 mouseY = e.clientY;
             });
 
+            // Animation loop for dot movement
+            function animateRepelDots() {
+                repelDots.forEach(dot => {
+                    // Calculate dot's current absolute position on screen
+                    const dotCurrentX = dot._initialX + dot._offsetX;
+                    const dotCurrentY = dot._initialY + dot._offsetY;
+
+                    const deltaX = mouseX - dotCurrentX;
+                    const deltaY = mouseY - dotCurrentY;
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                    if (distance < repelRadius) {
+                        // Calculate push direction and strength
+                        const angle = Math.atan2(deltaY, deltaX);
+                        const pushForce = repelStrength * (1 - distance / repelRadius); // Stronger push when closer
+
+                        dot._offsetX = -Math.cos(angle) * pushForce; // Push away from cursor
+                        dot._offsetY = -Math.sin(angle) * pushForce;
+                    } else {
+                        // Gradually return to original position
+                        dot._offsetX *= 0.9; // Decay factor (e.g., moves 10% closer each frame)
+                        dot._offsetY *= 0.9; // Decay factor
+                        // Snap to origin if very close to prevent tiny jiggles
+                        if (Math.abs(dot._offsetX) < 0.5) dot._offsetX = 0;
+                        if (Math.abs(dot._offsetY) < 0.5) dot._offsetY = 0;
+                    }
+                    // Apply the new position via transform (includes original base + offset)
+                    dot.style.transform = `translate(${dot._initialX + dot._offsetX}px, ${dot._initialY + dot._offsetY}px)`;
+                });
+                requestAnimationFrame(animateRepelDots); // Continue the loop
+            }
+
             // Start the animation loop when the DOM is ready
-            animateCursor();
+            animateRepelDots();
+
+            // Adjust dot positions on window resize
+            window.addEventListener('resize', () => {
+                repelDots.forEach(dot => {
+                    dot._initialX = Math.random() * window.innerWidth;
+                    dot._initialY = Math.random() * document.body.scrollHeight;
+                    dot.style.transform = `translate(${dot._initialX}px, ${dot._initialY}px)`;
+                    dot._offsetX = 0; // Reset offset on resize
+                    dot._offsetY = 0;
+                });
+            });
         });
     </script>
 
