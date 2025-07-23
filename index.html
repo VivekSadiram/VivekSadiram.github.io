@@ -23,16 +23,16 @@
 
         /* NEW: Repel Dot Effect Styles */
         .repel-dot {
-            position: fixed; /* CHANGED: Fixed position so they stay in viewport on scroll */
+            position: fixed; /* Fixed position so they stay in viewport on scroll */
             left: 0; 
             top: 0;  
-            width: 2px; /* CHANGED: Even smaller */
-            height: 2px; /* CHANGED: Even smaller */
-            background-color: rgba(255, 255, 255, 0.4); /* CHANGED: Much more visible white transparency */
+            width: 5px; /* CHANGED: Larger for visibility */
+            height: 5px; /* CHANGED: Larger for visibility */
+            background-color: rgba(255, 255, 255, 0.8); /* CHANGED: Very high visibility white */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* CHANGED: Stronger white glow */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1); /* CHANGED: Strong, pure white glow */
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: -1; /* CHANGED: Place far behind all content */
+            z-index: -1; /* Place far behind all content */
             transition: transform 0.3s ease-out; /* Smooth movement and return */
         }
         /* Ensure main content elements are above the dots */
@@ -582,9 +582,9 @@
 
             // NEW: Repel Dot Effect JavaScript
             const repelDots = [];
-            const numDots = 400; // CHANGED: Increased number of dots to 400
+            const numDots = 400; // CHANGED: Increased number of dots to 400 for denser effect
             const repelRadius = 100; // Cursor interaction radius (in pixels)
-            const repelStrength = 50; // CHANGED: Slightly increased repel strength
+            const repelStrength = 50; // Slightly increased repel strength
 
             // Create dots dynamically and set initial positions
             for (let i = 0; i < numDots; i++) {
@@ -593,10 +593,8 @@
                 document.body.appendChild(dot);
                 
                 // Store initial random positions relative to the viewport
-                // Spawning over full document.body.scrollHeight still relevant for `position:absolute` or initial large pages
-                // For `position:fixed`, initialY should be window.innerHeight
                 const initialX = Math.random() * window.innerWidth;
-                const initialY = Math.random() * window.innerHeight; // CHANGED: Spawn within current viewport for fixed
+                const initialY = Math.random() * window.innerHeight; // Spawn within current viewport for fixed
                 
                 dot._initialX = initialX; // Store base X
                 dot._initialY = initialY; // Store base Y
@@ -655,10 +653,10 @@
 
             // Adjust dot positions on window resize
             window.addEventListener('resize', () => {
-                // When resizing, we re-randomize positions to fill new dimensions
+                // For fixed position, we re-randomize positions to fill new dimensions
                 repelDots.forEach(dot => {
                     dot._initialX = Math.random() * window.innerWidth;
-                    dot._initialY = Math.random() * window.innerHeight; // CHANGED: Recalculate based on viewport
+                    dot._initialY = Math.random() * window.innerHeight; 
                     dot.style.transform = `translate(${dot._initialX}px, ${dot._initialY}px)`;
                     dot._offsetX = 0; // Reset offset on resize
                     dot._offsetY = 0;
