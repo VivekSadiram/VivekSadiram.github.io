@@ -210,11 +210,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             
-            /* UPDATED: More robust flexbox for 2 columns */
-            flex-grow: 1; /* Allow to grow */
-            flex-shrink: 1; /* Allow to shrink */
+            flex-grow: 1; /* Allows item to grow */
+            flex-shrink: 1; /* Allows item to shrink */
             flex-basis: calc(50% - 15px); /* Target 50% width minus half gap */
-            min-width: 300px; /* Ensure it doesn't get too small before wrapping */
+            min-width: 300px; /* Ensures it doesn't get too small before wrapping */
+            max-width: 400px; /* NEW: Limits individual item width on desktop */
             box-sizing: border-box; /* Ensure padding/border included in width */
 
             text-align: left;
@@ -269,12 +269,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
             text-align: center;
             
-            /* UPDATED: More robust flexbox for single column, matching portfolio item size */
-            flex-grow: 1; /* Allow to grow */
-            flex-shrink: 1; /* Allow to shrink */
+            flex-grow: 1; /* Allows item to grow */
+            flex-shrink: 1; /* Allows item to shrink */
             flex-basis: calc(50% - 15px); /* Target 50% width minus half gap */
-            min-width: 300px; /* Ensure it doesn't get too small */
-            max-width: 400px; /* Prevent it from stretching too wide on very large screens */
+            min-width: 300px; /* Ensures it doesn't get too small */
+            max-width: 400px; /* Ensures it matches portfolio item max-width */
             box-sizing: border-box; /* Ensure padding/border included in width */
 
             border: 1px solid #2a2a2a; /* Subtle border */
@@ -287,7 +286,7 @@
         }
         .contact-info > .contact-card:only-child {
             margin: 0 auto; /* Center the single card */
-            /* flex-basis: auto; /* Allow it to occupy full space if needed, within max-width */
+            flex-basis: auto; /* Allow it to take up its natural width within max-width */
         }
 
 
