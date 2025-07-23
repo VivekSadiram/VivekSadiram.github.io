@@ -27,11 +27,11 @@
             position: absolute;
             left: 0; /* Base position for transform */
             top: 0;  /* Base position for transform */
-            width: 10px; /* Size of the dot */
-            height: 10px;
-            background-color: rgba(0, 234, 254, 0.2); /* Accent blue with transparency */
+            width: 4px; /* CHANGED: Much smaller */
+            height: 4px; /* CHANGED: Much smaller */
+            background-color: rgba(255, 255, 255, 0.1); /* CHANGED: White with low opacity */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 10px rgba(0, 234, 254, 0.5); /* Subtle glow */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* CHANGED: White glow, slightly more visible for its size */
             pointer-events: none; /* Allows clicks to pass through */
             z-index: 9998; /* Below content, above background */
             transition: transform 0.3s ease-out; /* Smooth movement and return */
@@ -445,7 +445,7 @@
             <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
             <ul>
                 <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#portfolio">Portfolio</li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -583,7 +583,7 @@
 
             // NEW: Repel Dot Effect JavaScript
             const repelDots = [];
-            const numDots = 20; // Number of floating elements
+            const numDots = 150; // CHANGED: Increased number of dots
             const repelRadius = 100; // Cursor interaction radius (in pixels)
             const repelStrength = 40; // How far they move away (in pixels)
 
@@ -654,6 +654,7 @@
 
             // Adjust dot positions on window resize
             window.addEventListener('resize', () => {
+                // When resizing, we re-randomize positions to fill new dimensions
                 repelDots.forEach(dot => {
                     dot._initialX = Math.random() * window.innerWidth;
                     dot._initialY = Math.random() * document.body.scrollHeight;
