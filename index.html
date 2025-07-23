@@ -21,24 +21,24 @@
             overflow-x: hidden; /* Prevent horizontal scroll on small screens */
         }
 
-        /* NEW: Repel Dot Effect Styles */
+        /* NEW: Repel Dot Effect Styles (DIAGNOSTIC TEST) */
         .repel-dot {
             position: fixed; /* Fixed position so they stay in viewport on scroll */
             left: 0; 
             top: 0;  
-            width: 5px; /* CHANGED: Larger for visibility */
-            height: 5px; /* CHANGED: Larger for visibility */
-            background-color: rgba(255, 255, 255, 0.8); /* CHANGED: Very high visibility white */
+            width: 50px; /* CHANGED: Huge for visibility */
+            height: 50px; /* CHANGED: Huge for visibility */
+            background-color: red; /* CHANGED: Bright Red for undeniable visibility */
             border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 10px rgba(255, 255, 255, 1); /* CHANGED: Strong, pure white glow */
+            box-shadow: 0 0 50px red; /* CHANGED: Massive red glow */
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: -1; /* Place far behind all content */
+            z-index: 9999; /* CHANGED: Place on top of everything */
             transition: transform 0.3s ease-out; /* Smooth movement and return */
         }
         /* Ensure main content elements are above the dots */
         main, header, footer {
             position: relative; /* Ensure these are positioned to respect z-index */
-            z-index: 1; /* Default z-index for content */
+            z-index: 1; /* Default z-index for content (should be lower than dots in this test) */
         }
 
 
@@ -49,7 +49,7 @@
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Subtle white shadow below header */
             position: sticky;
             top: 0;
-            z-index: 1000; /* Higher than dots */
+            z-index: 1000; /* Lower than diagnostic dots */
         }
 
         nav {
@@ -101,7 +101,7 @@
             color: #00EAFE;
             cursor: pointer;
             padding: 10px;
-            z-index: 1001; /* Higher than dots */
+            z-index: 1001; /* Lower than diagnostic dots */
         }
 
         /* Hero Section */
@@ -582,9 +582,9 @@
 
             // NEW: Repel Dot Effect JavaScript
             const repelDots = [];
-            const numDots = 400; // CHANGED: Increased number of dots to 400 for denser effect
+            const numDots = 100; // CHANGED: Reduced to 100 for stability test
             const repelRadius = 100; // Cursor interaction radius (in pixels)
-            const repelStrength = 50; // Slightly increased repel strength
+            const repelStrength = 50; // Repel strength
 
             // Create dots dynamically and set initial positions
             for (let i = 0; i < numDots; i++) {
@@ -594,7 +594,7 @@
                 
                 // Store initial random positions relative to the viewport
                 const initialX = Math.random() * window.innerWidth;
-                const initialY = Math.random() * window.innerHeight; // Spawn within current viewport for fixed
+                const initialY = Math.random() * window.innerHeight; 
                 
                 dot._initialX = initialX; // Store base X
                 dot._initialY = initialY; // Store base Y
@@ -653,7 +653,6 @@
 
             // Adjust dot positions on window resize
             window.addEventListener('resize', () => {
-                // For fixed position, we re-randomize positions to fill new dimensions
                 repelDots.forEach(dot => {
                     dot._initialX = Math.random() * window.innerWidth;
                     dot._initialY = Math.random() * window.innerHeight; 
