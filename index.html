@@ -19,7 +19,35 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+            cursor: none; /* Hide default cursor */
         }
+
+        /* NEW: Cursor Glow Effect Styles */
+        #cursor-glow {
+            position: fixed;
+            top: -50px; /* Initial position off-screen */
+            left: -50px;
+            width: 30px; /* Size of the glow */
+            height: 30px;
+            background-color: rgba(0, 234, 254, 0.4); /* Accent blue with transparency */
+            border-radius: 50%; /* Make it a circle */
+            box-shadow: 0 0 20px rgba(0, 234, 254, 0.8), /* Inner glow */
+                        0 0 40px rgba(0, 234, 254, 0.6); /* Outer glow */
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: 9999; /* Ensure it's on top */
+            opacity: 0.8; /* Slightly visible always */
+            transform: translate(-50%, -50%); /* Center the glow on the cursor */
+            transition: opacity 0.2s ease-in-out; /* Smooth fade for hover */
+        }
+
+        body:hover #cursor-glow {
+            opacity: 1; /* Full opacity on hover */
+        }
+        body:active #cursor-glow {
+            transform: translate(-50%, -50%) scale(0.8); /* Shrink on click */
+            opacity: 0.6;
+        }
+
 
         /* Header & Navigation */
         header {
@@ -417,6 +445,8 @@
 </head>
 <body>
 
+    <div id="cursor-glow"></div>
+
     <header>
         <nav>
             <a href="#hero" class="logo">Vivek Sadiram</a>
@@ -543,7 +573,7 @@
                 });
             });
 
-            // NEW: Smooth Scrolling for all internal links
+            // Smooth Scrolling for all internal links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault(); // Prevent default jump behavior
@@ -558,6 +588,38 @@
                     }
                 });
             });
+
+            // NEW: Cursor Glow Effect JavaScript
+            const cursorGlow = document.getElementById('cursor-glow');
+            let mouseX = 0;
+            let mouseY = 0;
+            let cursorX = 0;
+            let cursorY = 0;
+
+            // Function to animate the cursor glow position
+            function animateCursor() {
+                // Apply a small smoothing factor (0.1) for the lag effect
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+
+                // Update the position of the cursor glow element
+                if (cursorGlow) {
+                    cursorGlow.style.left = cursorX + 'px';
+                    cursorGlow.style.top = cursorY + 'px';
+                }
+
+                // Request the next animation frame for a smooth loop
+                requestAnimationFrame(animateCursor);
+            }
+
+            // Update mouse coordinates on mousemove
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Start the animation loop when the DOM is ready
+            animateCursor();
         });
     </script>
 
