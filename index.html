@@ -12,7 +12,7 @@
             font-family: 'Open Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0A0A0A; /* Deep Dark Grey / Near Black */
+            background-color: #000000; /* CHANGED: Pure Black Background */
             color: #CCCCCC; /* Light Grey for main text */
             line-height: 1.6;
             display: flex;
@@ -23,7 +23,7 @@
 
         /* Header & Navigation */
         header {
-            background-color: #1A1A1A; /* Slightly lighter dark grey */
+            background-color: #000000; /* CHANGED: Pure Black Header */
             padding: 1.5rem 40px; /* Increased padding for full-width feel */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* More prominent, dark shadow */
             position: sticky;
@@ -92,7 +92,7 @@
             align-items: center;
             text-align: center;
             padding: 80px 40px; /* Increased padding for full-width feel */
-            background: linear-gradient(45deg, #0A0A0A, #1A1A1A); /* Subtle dark gradient */
+            background: linear-gradient(45deg, #000000, #1A1A1A); /* CHANGED: Subtle dark gradient on black */
         }
 
         .hero h1 {
@@ -156,10 +156,12 @@
             box-sizing: border-box; /* Include padding in width calculation */
             margin: 0 auto; /* Keep margin auto in case of a max-width later */
             text-align: center;
+            background-color: #000000; /* CHANGED: All sections default to Pure Black */
         }
 
         section:nth-of-type(even) {
-            background-color: #1A1A1A; /* Alternate dark background for sections */
+            /* REMOVED: No more alternating grey background */
+            background-color: #000000; /* Ensure it stays black even if rule is kept */
         }
 
         section h2 {
@@ -204,26 +206,28 @@
         }
 
         .portfolio-item {
-            background-color: #0A0A0A; /* Darker background for items */
+            background-color: #000000; /* CHANGED: Pure Black Background for item */
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* CHANGED: Default subtle white glow */
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15); /* Subtle White Glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ensure box-shadow transitions */
             
             flex-grow: 1; /* Allows item to grow */
             flex-shrink: 1; /* Allows item to shrink */
             flex-basis: calc(50% - 15px); /* Target 50% width minus half gap */
             min-width: 300px; /* Ensures it doesn't get too small before wrapping */
-            max-width: 400px; /* NEW: Limits individual item width on desktop */
+            max-width: 400px; /* Limits individual item width on desktop */
             box-sizing: border-box; /* Ensure padding/border included in width */
 
             text-align: left;
-            border: 1px solid #2a2a2a; /* Subtle border for definition */
+            border: 1px solid transparent; /* CHANGED: Transparent border so glow takes over, but maintains space */
         }
 
         .portfolio-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 234, 254, 0.2), 0 4px 15px rgba(0, 0, 0, 0.8); /* Accent glow on hover */
+            /* Existing Cyan Glow (now replaces white glow) */
+            box-shadow: 0 0 25px rgba(0, 234, 254, 0.6), 0 4px 15px rgba(0, 0, 0, 0.8); 
         }
 
         .portfolio-item img {
@@ -263,11 +267,12 @@
         }
 
         .contact-card {
-            background-color: #0A0A0A; /* Darker background for cards */
+            background-color: #000000; /* CHANGED: Pure Black Background for card */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Darker, more pronounced shadow */
-            text-align: center;
+            /* CHANGED: Default subtle white glow */
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15); /* Subtle White Glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ensure box-shadow transitions */
             
             flex-grow: 1; /* Allows item to grow */
             flex-shrink: 1; /* Allows item to shrink */
@@ -276,8 +281,7 @@
             max-width: 400px; /* Ensures it matches portfolio item max-width */
             box-sizing: border-box; /* Ensure padding/border included in width */
 
-            border: 1px solid #2a2a2a; /* Subtle border */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid transparent; /* CHANGED: Transparent border so glow takes over */
         }
         /* Ensure the single contact card centers if it's the only one */
         .contact-info {
@@ -292,7 +296,8 @@
 
         .contact-card:hover {
              transform: translateY(-5px);
-             box-shadow: 0 8px 25px rgba(0, 234, 254, 0.2), 0 4px 15px rgba(0, 0, 0, 0.8); /* Accent glow on hover */
+             /* Existing Cyan Glow (now replaces white glow) */
+             box-shadow: 0 0 25px rgba(0, 234, 254, 0.6), 0 4px 15px rgba(0, 0, 0, 0.8); 
         }
 
         .contact-card i {
@@ -319,7 +324,7 @@
 
         /* Footer */
         footer {
-            background-color: #000000; /* Dark background */
+            background-color: #000000; /* Already pure black */
             color: #CCCCCC; /* Light grey text */
             text-align: center;
             padding: 2rem 40px; /* Increased padding */
@@ -363,7 +368,7 @@
                 top: 100%; /* Position below header */
                 left: 0;
                 width: 100%;
-                background-color: #1A1A1A; /* Same as header background */
+                background-color: #000000; /* CHANGED: Pure black for mobile menu background */
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
                 border-top: 1px solid #2a2a2a;
                 padding: 20px 0;
