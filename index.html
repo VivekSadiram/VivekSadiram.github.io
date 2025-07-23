@@ -21,24 +21,49 @@
             overflow-x: hidden; /* Prevent horizontal scroll on small screens */
         }
 
-        /* NEW: Repel Dot Effect Styles (DIAGNOSTIC TEST) */
-        .repel-dot {
-            position: fixed; /* Fixed position so they stay in viewport on scroll */
+        /* NEW: Floating Dot Effect Styles (No mouse repel, automatic movement) */
+        .floating-dot { /* Changed class name from repel-dot */
+            position: fixed; /* Stays in viewport on scroll */
             left: 0; 
             top: 0;  
-            width: 50px; /* CHANGED: Huge for visibility */
-            height: 50px; /* CHANGED: Huge for visibility */
-            background-color: red; /* CHANGED: Bright Red for undeniable visibility */
-            border-radius: 50%; /* Make it a circle */
-            box-shadow: 0 0 50px red; /* CHANGED: Massive red glow */
+            width: 2px; /* Very small */
+            height: 2px; /* Very small */
+            background-color: rgba(255, 255, 255, 0.4); /* White with good visibility */
+            border-radius: 50%; /* Circle */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Strong white glow */
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: 9999; /* CHANGED: Place on top of everything */
-            transition: transform 0.3s ease-out; /* Smooth movement and return */
+            z-index: -1; /* Behind all content */
+            animation: floatAndFade 15s infinite ease-in-out alternate; /* Automatic animation */
         }
+
+        /* Keyframes for automatic floating movement and subtle fade */
+        @keyframes floatAndFade {
+            0% {
+                transform: translate(var(--initial-x), var(--initial-y)) scale(1);
+                opacity: 0.8;
+            }
+            25% {
+                transform: translate(calc(var(--initial-x) + 50px), calc(var(--initial-y) - 30px)) scale(0.95);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(calc(var(--initial-x) + 0px), calc(var(--initial-y) + 40px)) scale(1.05);
+                opacity: 0.9;
+            }
+            75% {
+                transform: translate(calc(var(--initial-x) - 40px), calc(var(--initial-y) - 20px)) scale(0.98);
+                opacity: 0.75;
+            }
+            100% {
+                transform: translate(var(--initial-x), var(--initial-y)) scale(1);
+                opacity: 0.8;
+            }
+        }
+
         /* Ensure main content elements are above the dots */
         main, header, footer {
             position: relative; /* Ensure these are positioned to respect z-index */
-            z-index: 1; /* Default z-index for content (should be lower than dots in this test) */
+            z-index: 1; /* Default z-index for content */
         }
 
 
@@ -49,7 +74,7 @@
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Subtle white shadow below header */
             position: sticky;
             top: 0;
-            z-index: 1000; /* Lower than diagnostic dots */
+            z-index: 1000; /* Higher than dots */
         }
 
         nav {
@@ -101,7 +126,7 @@
             color: #00EAFE;
             cursor: pointer;
             padding: 10px;
-            z-index: 1001; /* Lower than diagnostic dots */
+            z-index: 1001; /* Higher than dots */
         }
 
         /* Hero Section */
@@ -546,16 +571,15 @@
 
             type(); // Start the typing animation
 
-            // Mobile Menu Toggle (new code)
+            // Mobile Menu Toggle (existing code)
             const menuToggle = document.querySelector('.menu-toggle');
             const navUl = document.querySelector('nav ul');
-            const navLinks = document.querySelectorAll('nav ul li a'); // Get all navigation links
+            const navLinks = document.querySelectorAll('nav ul li a');
 
             menuToggle.addEventListener('click', function() {
                 navUl.classList.toggle('nav-open');
             });
 
-            // Close menu when a link is clicked (for smooth scrolling behavior)
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (navUl.classList.contains('nav-open')) {
@@ -564,10 +588,10 @@
                 });
             });
 
-            // Smooth Scrolling for all internal links
+            // Smooth Scrolling for all internal links (existing code)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // Prevent default jump behavior
+                    e.preventDefault(); 
 
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
@@ -580,85 +604,50 @@
                 });
             });
 
-            // NEW: Repel Dot Effect JavaScript
-            const repelDots = [];
-            const numDots = 100; // CHANGED: Reduced to 100 for stability test
-            const repelRadius = 100; // Cursor interaction radius (in pixels)
-            const repelStrength = 50; // Repel strength
+            // NEW: Floating Dot Effect JavaScript (Automatic movement, no mouse repel)
+            const floatingDots = []; // Changed array name
+            const numDots = 400; // Increased number of dots
+            const floatRange = 50; // Pixels the dots will drift from their initial position
+            const animationDurationMin = 10; // Minimum animation duration in seconds
+            const animationDurationMax = 20; // Maximum animation duration in seconds
 
-            // Create dots dynamically and set initial positions
+            // Create dots dynamically and set initial positions and custom properties for CSS animation
             for (let i = 0; i < numDots; i++) {
                 const dot = document.createElement('div');
-                dot.classList.add('repel-dot');
+                dot.classList.add('floating-dot'); // Changed class name
                 document.body.appendChild(dot);
                 
-                // Store initial random positions relative to the viewport
+                // Random initial positions within the viewport
                 const initialX = Math.random() * window.innerWidth;
                 const initialY = Math.random() * window.innerHeight; 
                 
-                dot._initialX = initialX; // Store base X
-                dot._initialY = initialY; // Store base Y
-                dot._offsetX = 0; // Current X offset from base
-                dot._offsetY = 0; // Current Y offset from base
-
-                // Apply initial position using transform
-                dot.style.transform = `translate(${initialX}px, ${initialY}px)`;
-                repelDots.push(dot);
+                // Set CSS custom properties for animation to use
+                dot.style.setProperty('--initial-x', `${initialX}px`);
+                dot.style.setProperty('--initial-y', `${initialY}px`);
+                
+                // Randomize animation duration and delay for staggered effect
+                const duration = Math.random() * (animationDurationMax - animationDurationMin) + animationDurationMin;
+                const delay = Math.random() * -duration; // Negative delay starts animation at a random point
+                
+                dot.style.animationDuration = `${duration}s`;
+                dot.style.animationDelay = `${delay}s`;
+                
+                floatingDots.push(dot); // Add to new array name
             }
 
-            // Mouse coordinates
-            let mouseX = 0;
-            let mouseY = 0;
+            // Remove mousemove listener as dots are automatic now
+            document.removeEventListener('mousemove', (e) => { /* Removed this part as no longer needed */ });
 
-            // Update mouse coordinates on mousemove
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
+            // Removed animateRepelDots function as it's no longer needed for repel logic
+            // Removed window resize listener if it was specifically for repel logic
 
-            // Animation loop for dot movement
-            function animateRepelDots() {
-                repelDots.forEach(dot => {
-                    // Calculate dot's current absolute position on screen
-                    const dotCurrentX = dot._initialX + dot._offsetX;
-                    const dotCurrentY = dot._initialY + dot._offsetY;
-
-                    const deltaX = mouseX - dotCurrentX;
-                    const deltaY = mouseY - dotCurrentY;
-                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-                    if (distance < repelRadius) {
-                        // Calculate push direction and strength
-                        const angle = Math.atan2(deltaY, deltaX);
-                        const pushForce = repelStrength * (1 - distance / repelRadius); // Stronger push when closer
-
-                        dot._offsetX = -Math.cos(angle) * pushForce; // Push away from cursor
-                        dot._offsetY = -Math.sin(angle) * pushForce;
-                    } else {
-                        // Gradually return to original position
-                        dot._offsetX *= 0.9; // Decay factor (e.g., moves 10% closer each frame)
-                        dot._offsetY *= 0.9; // Decay factor
-                        // Snap to origin if very close to prevent tiny jiggles
-                        if (Math.abs(dot._offsetX) < 0.5) dot._offsetX = 0;
-                        if (Math.abs(dot._offsetY) < 0.5) dot._offsetY = 0;
-                    }
-                    // Apply the new position via transform (includes original base + offset)
-                    dot.style.transform = `translate(${dot._initialX + dot._offsetX}px, ${dot._initialY + dot._offsetY}px)`;
-                });
-                requestAnimationFrame(animateRepelDots); // Continue the loop
-            }
-
-            // Start the animation loop when the DOM is ready
-            animateRepelDots();
-
-            // Adjust dot positions on window resize
+            // New window resize logic to re-randomize positions and ensure dots fill new dimensions
             window.addEventListener('resize', () => {
-                repelDots.forEach(dot => {
-                    dot._initialX = Math.random() * window.innerWidth;
-                    dot._initialY = Math.random() * window.innerHeight; 
-                    dot.style.transform = `translate(${dot._initialX}px, ${dot._initialY}px)`;
-                    dot._offsetX = 0; // Reset offset on resize
-                    dot._offsetY = 0;
+                floatingDots.forEach(dot => {
+                    dot.style.setProperty('--initial-x', `${Math.random() * window.innerWidth}px`);
+                    dot.style.setProperty('--initial-y', `${Math.random() * window.innerHeight}px`);
+                    // Reset transform to initial to re-start animation from new point
+                    dot.style.transform = `translate(0,0)`; 
                 });
             });
         });
