@@ -13,7 +13,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matc
 themeToggleBtn.addEventListener('click', () => {
     const currentTheme = body.getAttribute('data-theme');
     if (currentTheme === 'light') {
-        body.removeAttribute('data-theme');
+        body.removeAttribute('data-theme'); // Defaults to Dark
         themeToggleBtn.textContent = '🌓';
     } else {
         body.setAttribute('data-theme', 'light');
