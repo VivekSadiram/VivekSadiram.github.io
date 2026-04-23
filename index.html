@@ -1,576 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vivek Sadiram | Entrepreneur</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Basic Reset & Body Styling */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000; /* Pure Black Background */
-            color: #CCCCCC; /* Light Grey for main text */
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden; /* Prevent horizontal scroll on small screens */
-        }
-
-        /* Removed: .floating-dot styles */
-        /* Removed: @keyframes floatAndFade */
-        
-        /* Ensure main content elements layering is default */
-        main, header, footer {
-            position: relative; 
-            z-index: auto; /* Revert to auto or remove if not explicitly needed */
-        }
-
-
-        /* Header & Navigation */
-        header {
-            background-color: #000000; /* Pure Black Header */
-            padding: 1.5rem 40px; /* Increased padding for full-width feel */
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Subtle white shadow below header */
-            position: sticky;
-            top: 0;
-            z-index: 1000; /* Standard z-index for sticky header */
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px; /* Allow wider content for navigation */
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #00EAFE; /* Electric Blue Accent */
-            text-decoration: none;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            transition: all 0.3s ease-in-out; /* For mobile menu animation */
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            color: #CCCCCC; /* Light grey */
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #00EAFE; /* Electric Blue Accent */
-        }
-
-        /* Hamburger Menu Toggle */
-        .menu-toggle {
-            display: none; /* Hidden by default on desktop */
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: #00EAFE;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001; /* Standard z-index for toggle */
-        }
-
-        /* Hero Section */
-        .hero {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 80px 40px; /* Increased padding for full-width feel */
-            background-color: #000000; /* Solid Pure Black Background for Hero */
-        }
-
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #FFFFFF; /* Pure white for main heading */
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 800px; /* Keep text contained */
-            color: #CCCCCC;
-        }
-
-        /* Typing effect specific styles */
-        .typing-text {
-            color: #00EAFE; /* Electric Blue Accent for typing text */
-            border-right: 2px solid #00EAFE; /* Blinking cursor matches accent */
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        /* Keyframes for typing effect */
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        /* Keyframes for blinking caret */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00EAFE; } /* Blinking cursor matches accent */
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background-color: #00EAFE; /* Electric Blue Accent */
-            color: #0A0A0A; /* Dark text on bright button */
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 234, 254, 0.4); /* Glow effect */
-        }
-
-        .btn-primary:hover {
-            background-color: #33F0FF; /* Slightly brighter blue on hover */
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(0, 234, 254, 0.6); /* More glow on hover */
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 40px; /* Increased padding for full-width feel */
-            width: 100%; /* Ensure sections take full width */
-            box-sizing: border-box; /* Include padding in width calculation */
-            margin: 0 auto; /* Keep margin auto in case of a max-width later */
-            text-align: center;
-            background-color: #000000; /* All sections default to Pure Black */
-        }
-
-        section:nth-of-type(even) {
-            background-color: #000000; /* Ensure it stays black even if rule is kept */
-        }
-
-        section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            color: #FFFFFF; /* White for section headings */
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-        }
-
-        section h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: #00EAFE; /* Accent line under headings */
-            margin: 10px auto 0;
-        }
-
-        .about-content, .portfolio-grid, .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-            max-width: 1200px; /* Max width for inner content grids */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Specific styles for About Me centering */
-        .about-content {
-            text-align: center; /* Ensures text inside is centered */
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #CCCCCC;
-        }
-
-        .portfolio-item {
-            background-color: #000000; /* Pure Black Background for item */
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.25); /* More visible Subtle White Glow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ensure box-shadow transitions */
-            
-            flex-grow: 1; /* Allows item to grow */
-            flex-shrink: 1; /* Allows item to shrink */
-            flex-basis: calc(50% - 15px); /* Target 50% width minus half gap */
-            min-width: 300px; /* Ensures it doesn't get too small before wrapping */
-            max-width: 400px; /* Limits individual item width on desktop */
-            box-sizing: border-box; /* Ensure padding/border included in width */
-
-            text-align: left;
-            border: 1px solid transparent; /* Transparent border so glow takes over, but maintains space */
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 234, 254, 0.6), 0 4px 15px rgba(0, 0, 0, 0.8); 
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #2a2a2a; /* Subtle line below image */
-        }
-
-        .portfolio-item-content {
-            padding: 20px;
-        }
-
-        .portfolio-item-content h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            color: #00EAFE; /* Accent color for project titles */
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        .portfolio-item-content p {
-            font-size: 0.95rem;
-            color: #999999; /* Slightly darker grey for body text in cards */
-            margin-bottom: 15px;
-        }
-
-        .portfolio-item-content a {
-            color: #00EAFE; /* Accent color for links */
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s ease;
-        }
-
-        .portfolio-item-content a:hover {
-            color: #33F0FF; /* Brighter accent on hover */
-        }
-
-        .contact-card {
-            background-color: #000000; /* Pure Black Background for card */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.25); /* More visible Subtle White Glow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            
-            flex-grow: 1; /* Allows item to grow */
-            flex-shrink: 1; /* Allows item to shrink */
-            flex-basis: calc(50% - 15px); /* Target 50% width minus half gap */
-            min-width: 300px; /* Ensures it doesn't get too small */
-            max-width: 400px; /* Ensures it matches portfolio item max-width */
-            box-sizing: border-box; /* Ensure padding/border included in width */
-
-            border: 1px solid transparent; /* Transparent border so glow takes over, but maintains space */
-        }
-        /* Ensure the single contact card centers if it's the only one */
-        .contact-info {
-            justify-content: center; /* Already set, but good to confirm */
-            width: 100%; /* Ensure it spans full width to help centering */
-        }
-        .contact-info > .contact-card:only-child {
-            margin: 0 auto; /* Center the single card */
-            flex-basis: auto; /* Allow it to take up its natural width within max-width */
-        }
-
-
-        .contact-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 0 25px rgba(0, 234, 254, 0.6), 0 4px 15px rgba(0, 0, 0, 0.8); 
-        }
-
-        .contact-card i {
-            font-size: 2.5rem;
-            color: #00EAFE; /* Accent color for icons */
-            margin-bottom: 15px;
-        }
-
-        .contact-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            color: #FFFFFF; /* White for contact card headings */
-            margin-bottom: 10px;
-        }
-
-        .contact-card p, .contact-card a {
-            color: #999999; /* Slightly darker grey for body text in cards */
-            text-decoration: none;
-        }
-
-        .contact-card a:hover {
-            color: #00EAFE; /* Accent color on hover */
-        }
-
-        /* Footer */
-        footer {
-            background-color: #000000; /* Already pure black */
-            color: #CCCCCC; /* Light grey text */
-            text-align: center;
-            padding: 2rem 40px; /* Increased padding */
-            margin-top: auto;
-            font-size: 0.9rem;
-            border-top: 1px solid #2a2a2a; /* Subtle top border */
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            color: #CCCCCC; /* Light grey icons */
-            font-size: 1.8rem;
-            margin: 0 15px;
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: #00EAFE; /* Accent color on hover */
-            transform: translateY(-3px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 1.5rem 20px; /* Adjust padding for smaller screens */
-            }
-            nav {
-                flex-direction: row; /* Keep logo and toggle on one line */
-                justify-content: space-between;
-                width: 100%;
-                max-width: none; /* No max width for mobile nav */
-            }
-
-            nav ul {
-                display: none; /* Hide desktop menu by default */
-                flex-direction: column;
-                position: absolute;
-                top: 100%; /* Position below header */
-                left: 0;
-                width: 100%;
-                background-color: #000000; /* Pure black for mobile menu background */
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-                border-top: 1px solid #2a2a2a;
-                padding: 20px 0;
-                max-height: 0; /* Hidden state */
-                overflow: hidden; /* Hide overflow content */
-            }
-
-            nav ul.nav-open {
-                display: flex; /* Show menu when active */
-                max-height: 300px; /* Max height for animation (adjust as needed) */
-            }
-
-            nav ul li {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block; /* Show hamburger on mobile */
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            section {
-                padding: 60px 20px; /* Adjust section padding for mobile */
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            .portfolio-item, .contact-card {
-                width: 100%; /* Single column on small screens */
-                max-width: 400px; /* Prevent too wide on very small screens */
-                flex-basis: auto; /* Allow to take full width */
-            }
-            .contact-info > .contact-card:only-child {
-                margin: 0 auto; /* Ensure it centers on mobile too */
-            }
-            .about-content, .portfolio-grid, .contact-info {
-                gap: 20px; /* Smaller gap on mobile */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Navigation -->
     <header>
         <nav>
             <a href="#hero" class="logo">Vivek Sadiram</a>
-            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-            <ul>
+            <div class="nav-controls">
+                <button id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="desktop-nav">
                 <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Fullscreen Mobile Menu Overlay -->
+    <div class="mobile-overlay">
+        <ul>
+            <li><a href="#about" class="mobile-link">About</a></li>
+            <li><a href="#portfolio" class="mobile-link">Portfolio</a></li>
+            <li><a href="#contact" class="mobile-link">Contact</a></li>
+        </ul>
+    </div>
+
     <main>
+        <!-- Hero Section -->
         <section id="hero" class="hero">
-            <h1>Hello, I'm <span style="color: #FFFFFF;">Vivek Sadiram</span>.</h1>
-            <p>I am a <span class="typing-text" data-words='["Developer", "Innovator", "Problem Solver", "Tech Enthusiast"]'></span></p>
-            <a href="#portfolio" class="btn-primary">View My Work</a>
+            <div class="hero-content">
+                <div class="hacker-greeting">console.log("Hi, I'm");</div>
+                <h1>Vivek Sadiram</h1>
+                <p>I am a <span class="typing-text" data-words='["Developer", "Innovator", "Problem Solver", "Tech Enthusiast"]'></span><span class="cursor">&nbsp;</span></p>
+                <a href="#portfolio" class="btn-primary">View My Work</a>
+            </div>
         </section>
 
+        <!-- About Section -->
         <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
+            <div class="section-container">
+                <h2>About Me</h2>
+                <div class="about-content glass-card reveal-card">
                     <p>Welcome to my corner of the internet! I'm Vivek Sadiram, a passionate and dedicated individual exploring the vast world of technology. My journey involves delving into various programming languages, frameworks, and tools to build engaging projects and solve real-world problems.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Portfolio Section -->
         <section id="portfolio">
-            <h2>My Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+1" alt="Project 1">
-                    <div class="portfolio-item-content">
-                        <h3>ImageInfo</h3>
-                        <p>A simple Chrome extension that displays image dimensions and size when hovering over an image. The extension uses fetch API to get image details and provides a clean, customizable overlay for a better user experience...</p>
-                        <a href="https://github.com/VivekSadiram/ImageInfo/">Learn More &rarr;</a>
+            <div class="section-container">
+                <h2>My Portfolio</h2>
+                <div class="portfolio-grid">
+                    <!-- Project 1 -->
+                    <div class="portfolio-item glass-card reveal-card">
+                        <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+1" alt="Project 1">
+                        <div class="portfolio-item-content">
+                            <h3>ImageInfo</h3>
+                            <p>A simple Chrome extension that displays image dimensions and size when hovering over an image. The extension uses fetch API to get image details and provides a clean, customizable overlay for a better user experience...</p>
+                            <a href="https://github.com/VivekSadiram/ImageInfo/">Learn More &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="portfolio-item glass-card reveal-card">
+                        <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+2" alt="Project 2">
+                        <div class="portfolio-item-content">
+                            <h3>Project Name 2</h3>
+                            <p>Another compelling project description. Showcases different skills or areas of expertise.</p>
+                            <a href="#">Learn More &rarr;</a>
+                        </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x200/0A0A0A/00EAFE?text=Project+2" alt="Project 2">
-                    <div class="portfolio-item-content">
-                        <h3>Project Name 2</h3>
-                        <p>Another compelling project description. Showcases different skills or areas of expertise.</p>
-                        <a href="#">Learn More &rarr;</a>
-                    </div>
-                </div>
-                </div>
+            </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact">
-            <h2>Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email Me</h3>
-                    <p><a href="mailto:VivekSadiram@Outlook.com">VivekSadiram@Outlook.com</a></p>
+            <div class="section-container">
+                <h2>Get In Touch</h2>
+                <div class="contact-info">
+                    <div class="contact-card glass-card reveal-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Me</h3>
+                        <p><a href="mailto:VivekSadiram@Outlook.com">VivekSadiram@Outlook.com</a></p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Vivek Sadiram. All rights reserved.</p>
         <div class="social-links">
             <a href="https://github.com/VivekSadiram" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/yourlinkedinprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="https://twitter.com/yourtwitterhandle" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-            </div>
+        </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Typing Effect (existing code)
-            const typingTextElement = document.querySelector('.typing-text');
-            const words = JSON.parse(typingTextElement.dataset.words);
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let delay = 100; // Typing speed
-
-            function type() {
-                const currentWord = words[wordIndex];
-                const displayedText = isDeleting
-                    ? currentWord.substring(0, charIndex--)
-                    : currentWord.substring(0, charIndex++);
-
-                typingTextElement.textContent = displayedText;
-
-                let currentDelay = delay;
-                if (isDeleting) {
-                    currentDelay /= 2; // Faster deleting
-                }
-
-                if (!isDeleting && charIndex === currentWord.length) {
-                    currentDelay = 1500; // Pause at end of word
-                    isDeleting = true;
-                } else if (isDeleting && charIndex < 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length; // Move to next word
-                    currentDelay = 500; // Pause before typing new word
-                }
-
-                setTimeout(type, currentDelay);
-            }
-
-            type(); // Start the typing animation
-
-            // Mobile Menu Toggle (existing code)
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navUl = document.querySelector('nav ul');
-            const navLinks = document.querySelectorAll('nav ul li a');
-
-            menuToggle.addEventListener('click', function() {
-                navUl.classList.toggle('nav-open');
-            });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navUl.classList.contains('nav-open')) {
-                        navUl.classList.remove('nav-open');
-                    }
-                });
-            });
-
-            // Smooth Scrolling for all internal links (existing code)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); 
-
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // REMOVED: All repel dot JavaScript code 
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
