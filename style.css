@@ -1,30 +1,30 @@
 /* --- Neumorphic Variables & Theming --- */
 :root {
-    /* Dark Theme (Default) - Requires a specific gray, not pure black, for shadows to work */
+    /* Dark Theme (Default) */
     --bg-main: #2a2d32;
     --text-primary: #e2e8f0;
     --text-secondary: #94a3b8;
     --accent: #00eafe; 
     
     /* Neumorphic Shadows for Dark Mode */
-    --shadow-light: #363a40; /* Top-left highlight */
-    --shadow-dark: #1e2024;  /* Bottom-right shadow */
+    --shadow-light: #363a40; 
+    --shadow-dark: #1e2024;  
     
     --nav-bg: rgba(42, 45, 50, 0.9);
 }
 
 [data-theme="light"] {
-    /* Light Theme */
-    --bg-main: #e0e5ec;
+    /* Light Theme - Updated to #F0F5FF */
+    --bg-main: #f0f5ff;
     --text-primary: #2d3748;
     --text-secondary: #718096;
     --accent: #0284c7; 
     
-    /* Neumorphic Shadows for Light Mode */
+    /* Neumorphic Shadows recalculated for the icy blue-gray */
     --shadow-light: #ffffff;
-    --shadow-dark: #a3b1c6;
+    --shadow-dark: #d1d6e5;
     
-    --nav-bg: rgba(224, 229, 236, 0.9);
+    --nav-bg: rgba(240, 245, 255, 0.9);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
